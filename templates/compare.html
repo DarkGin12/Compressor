@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comparação de Imagens</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='compare.css') }}">
+</head>
+<body>
+    <h1>Resultado da comparação</h1>
+    <div class="image-pair">
+        {% for original, compressed in image_pairs %}
+            <div>
+                <h2>Antes</h2>
+                <img src="{{ url_for('static', filename='original/' + original) }}" alt="Imagem Original">
+            </div>
+            <div>
+                <h2>Depois</h2>
+                <img src="{{ url_for('static', filename='compressed/' + compressed) }}" alt="Imagem Comprimida">
+            </div>
+        {% endfor %}
+    </div>
+</body>
+</html>

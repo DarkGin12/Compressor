@@ -1,0 +1,171 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    color: #333;
+    margin: 0;
+    padding: 20px;
+}
+
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+    color: #4A90E2;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin: 10px 0 5px;
+    font-weight: bold;
+}
+
+input[type="file"],
+input[type="number"],
+select {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+input[type="range"] {
+    width: 100%;
+    margin: 10px 0;
+    -webkit-appearance: none;
+    appearance: none;
+    background: #ddd;
+    height: 6px;
+    border-radius: 5px;
+    outline: none;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    background-color: #3498db;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+input[type="range"]::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    background-color: #3498db;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.range-value {
+    text-align: center;
+    font-weight: bold;
+}
+
+button {
+    margin-top: 10px;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #4CAF50;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+.tutorial-btn {
+    padding: 10px 20px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.tutorial-btn:hover {
+    background-color: #2980b9;
+}
+
+.profile-btn {
+    background-image: url('https://product-hub-prd.madeiramadeira.com.br/1991581/images/16c07068-d2df-4680-8789-8c6335e628e843124572quadroemtelapaisagemcasasantigas60x60cm63085661585x600.jpg?width=500&canvas=1:1&bg-color=FFF');
+    background-size: cover;
+    background-position: center;
+    width: 60px;
+    height: 60px;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    border-radius: 50%;
+}
+
+.profile-btn:hover {
+    background-color: #2980b9;
+}
+
+.button-container {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+@media (max-width: 600px) {
+    .container {
+        width: 90%;
+    }
+
+    input[type="file"],
+    input[type="number"],
+    select,
+    button {
+        font-size: 14px;
+    }
+
+    .tutorial-btn,
+    .profile-btn {
+        font-size: 14px;
+        padding: 8px 16px;
+    }
+}
+
+.share-buttons {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.share-buttons button {
+    margin: 0 5px;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: #007bff;
+    color: white;
+    display: flex;
+    align-items: center;
+}
+
+.share-buttons button i {
+    margin-right: 5px;
+}
+
+.share-buttons button:hover {
+    background-color: #0056b3;
+}

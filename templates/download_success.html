@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Download em Andamento</title>
+    <script>
+        function downloadFile() {
+            const link = document.createElement('a');
+            link.href = "{{ url_for('download', filename=zipfile) }}"; 
+            link.download = 'images.zip'; 
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link); 
+        }
+
+        function redirectToCompare() {
+            window.location.href = "{{ url_for('compare') }}";
+        }
+
+        window.onload = function() {
+            downloadFile();
+            setTimeout(redirectToCompare, 3000); 
+        };
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Download em Andamento</h1>
+        <p>Seu arquivo de imagens está sendo baixado automaticamente!</p>
+        <p>Você será redirecionado para a página de comparação em 3 segundos...</p>
+    </div>
+</body>
+</html>

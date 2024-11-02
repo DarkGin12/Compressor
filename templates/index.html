@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compressor de Imagens</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Compressor de Imagens</h1>
+        <form id="imageForm" action="/compress" method="POST" enctype="multipart/form-data">
+            <label for="images">Selecione imagens:</label>
+            <input type="file" id="images" name="images" multiple required>
+
+            <label for="quality">Qualidade (1-100):</label>
+            <input type="range" id="quality" name="quality" min="1" max="100" value="20" 
+                   oninput="document.getElementById('qualityValue').innerText = this.value;">
+            <div class="range-value">Qualidade: <span id="qualityValue">20</span></div>
+
+            <label for="brightness">Brilho (0.0-2.0):</label>
+            <input type="range" id="brightness" name="brightness" min="0" max="2" step="0.1" value="1.0" 
+                   oninput="document.getElementById('brightnessValue').innerText = this.value;">
+            <div class="range-value">Brilho: <span id="brightnessValue">1.0</span></div>
+
+            <label for="contrast">Contraste (0.0-2.0):</label>
+            <input type="range" id="contrast" name="contrast" min="0" max="2" step="0.1" value="1.0" 
+                   oninput="document.getElementById('contrastValue').innerText = this.value;">
+            <div class="range-value">Contraste: <span id="contrastValue">1.0</span></div>
+
+            <label for="saturation">Saturação (0.0-2.0):</label>
+            <input type="range" id="saturation" name="saturation" min="0" max="2" step="0.1" value="1.0" 
+                   oninput="document.getElementById('saturationValue').innerText = this.value;">
+            <div class="range-value">Saturação: <span id="saturationValue">1.0</span></div>
+
+            <label for="width">Largura:</label>
+            <input type="number" id="width" name="width" placeholder="Largura em pixels">
+
+            <label for="height">Altura:</label>
+            <input type="number" id="height" name="height" placeholder="Altura em pixels">
+
+            <button type="submit">Comprimir Imagens</button>
+        </form>
+    </div>
+
+    <div class="button-container">
+        <button id="tutorialBtn" class="tutorial-btn">?</button>
+        <button id="profileBtn" class="profile-btn" 
+                style="background-image: url('https://product-hub-prd.madeiramadeira.com.br/1991581/images/16c07068-d2df-4680-8789-8c6335e628e843124572quadroemtelapaisagemcasasantigas60x60cm63085661585x600.jpg?width=500&canvas=1:1&bg-color=FFF');" 
+                onclick="changeProfileImage()">Perfil</button>
+    </div>
+
+    <div class="share-buttons">
+        <button onclick="shareOnFacebook('http://127.0.0.1:5000')">
+            <i class="fab fa-facebook-f"></i> Compartilhar no Facebook
+        </button>
+        <button onclick="shareOnTwitter('http://127.0.0.1:5000')">
+            <i class="fab fa-twitter"></i> Compartilhar no Twitter
+        </button>
+        <button onclick="shareOnLinkedIn('http://127.0.0.1:5000')">
+            <i class="fab fa-linkedin-in"></i> Compartilhar no LinkedIn
+        </button>
+        <button onclick="sendEmail('http://127.0.0.1:5000')">
+            <i class="fas fa-envelope"></i> Enviar por E-mail
+        </button>
+    </div>
+
+    <script>
+        const profileImages = [
+            'https://product-hub-prd.madeiramadeira.com.br/1991581/images/16c07068-d2df-4680-8789-8c6335e628e843124572quadroemtelapaisagemcasasantigas60x60cm63085661585x600.jpg?width=500&canvas=1:1&bg-color=FFF',
+            'https://s.aficionados.com.br/imagens/the-flash-5-temporada_hs.jpg',
+            'https://cdn.awsli.com.br/299/299243/arquivos/rick-and-morty%202.jpg',
+            'https://static.nationalgeographicbrasil.com/files/styles/image_3200/public/wolverine-pelicula.jpg?w=760&h=507'
+        ];
+        let currentProfileIndex = 0;
+
+        function changeProfileImage() {
+            currentProfileIndex = (currentProfileIndex + 1) % profileImages.length;
+            const profileBtn = document.getElementById('profileBtn');
+            profileBtn.style.backgroundImage = `url('${profileImages[currentProfileIndex]}')`;
+            profileBtn.innerText = 'User';
+            document.getElementById('width').value = 1920;
+            document.getElementById('height').value = 1080;
+        }
+
+        document.getElementById('tutorialBtn').addEventListener('click', function() {
+            const tutorialWindow = window.open('', 'Tutorial', 'width=800,height=600');
+            const images = [
+                "{{ url_for('static', filename='images/imagem7.jpg') }}",
+                "{{ url_for('static', filename='images/imagem2.jpg') }}",
+                "{{ url_for('static', filename='images/imagem3.jpg') }}",
+                "{{ url_for('static', filename='images/imagem4.jpg') }}",
+                "{{ url_for('static', filename='images/imagem5.jpg') }}",
+                "{{ url_for('static', filename='images/imagem6.jpg') }}"
+            ];
+
+            tutorialWindow.document.write(`
+                <html>
+                <head>
+                    <title>Tutorial</title>
+                    <style>
+                        body {
+                            font-family: Arial, sans-serif;
+                            background-color: #f0f0f0;
+                            padding: 20px;
+                        }
+                        img {
+                            width: 100%;
+                            max-width: 700px;
+                            display: block;
+                            margin: 20px auto;
+                        }
+                    </style>
+                </head>
+                <body>
+                    <h1>Como usar o Compressor de Imagens</h1>
+                    ${images.map(img => `<img src="${img}" alt="Imagem">`).join('')}
+                    <p>Para fechar esta janela, aperte no X.</p>
+                </body>
+                </html>
+            `);
+            tutorialWindow.document.close();
+        });
+
+        function shareOnFacebook(url) {
+            const shareUrl = "https://www.facebook.com/sharer/sharer.php?u=" + encodeURIComponent(url);
+            window.open(shareUrl, "_blank");
+        }
+
+        function shareOnTwitter(url) {
+            const shareUrl = "https://twitter.com/intent/tweet?url=" + encodeURIComponent(url) + "&text=Veja este site!";
+            window.open(shareUrl, "_blank");
+        }
+
+        function shareOnLinkedIn(url) {
+            const shareUrl = "https://www.linkedin.com/sharing/share-offsite/?url=" + encodeURIComponent(url);
+            window.open(shareUrl, "_blank");
+        }
+
+        function sendEmail(url) {
+            const subject = "Confira este site!";
+            const body = "Eu gostaria de compartilhar este site com você: " + url;
+            window.location.href = "mailto:?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
+        }
+    </script>
+</body>
+</html>
